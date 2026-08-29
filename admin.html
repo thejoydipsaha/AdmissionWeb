@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width,initial-scale=1">
+
+<title>ADMISSION — Admin</title>
+
+<style>
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0
+}
+
+body{
+font-family:Inter,Arial,sans-serif;
+color:#fff;
+min-height:100vh;
+background:
+radial-gradient(
+circle at 10% 0%,
+#6254ff25,
+transparent 30%
+),
+radial-gradient(
+circle at 90% 20%,
+#00bfff18,
+transparent 28%
+),
+#07080d
+}
+
+header{
+position:sticky;
+top:14px;
+z-index:20;
+width:min(
+1200px,
+calc(100% - 28px)
+);
+margin:14px auto;
+padding:14px 20px;
+border:1px solid #ffffff18;
+border-radius:22px;
+background:#1011188c;
+backdrop-filter:blur(25px);
+display:flex;
+align-items:center;
+justify-content:space-between;
+box-shadow:0 20px 60px #0005
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:10px
+}
+
+.logoMark{
+width:40px;
+height:40px;
+border-radius:13px;
+display:grid;
+place-items:center;
+font-weight:800;
+background:
+linear-gradient(
+135deg,
+#897bff,
+#5d91ff
+)
+}
+
+.logoText{
+font-size:14px;
+font-weight:800
+}
+
+.logoText small{
+display:block;
+color:#888;
+font-size:8px;
+letter-spacing:1.5px
+}
+
+.container{
+width:min(
+1100px,
+calc(100% - 28px)
+);
+margin:60px auto
+}
+
+h1{
+font-size:38px;
+letter-spacing:-2px
+}
+
+.subtitle{
+color:#777;
+font-size:11px;
+margin-top:7px
+}
+
+.panel{
+margin-top:25px;
+padding:22px;
+border:1px solid #ffffff12;
+border-radius:22px;
+background:#ffffff07;
+backdrop-filter:blur(20px)
+}
+
+.subjectHead{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:15px
+}
+
+.subjectHead h2{
+font-size:18px
+}
+
+button{
+border:1px solid #ffffff12;
+background:#ffffff08;
+color:#fff;
+padding:9px 13px;
+border-radius:10px;
+cursor:pointer;
+font-size:11px
+}
+
+.primary{
+border:0;
+background:
+linear-gradient(
+135deg,
+#7164ff,
+#8e82ff
+)
+}
+
+.danger{
+color:#ff9999
+}
+
+.chapter{
+margin-top:12px;
+border:1px solid #ffffff10;
+border-radius:16px;
+overflow:hidden
+}
+
+.chapterHead{
+padding:14px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px;
+background:#ffffff05
+}
+
+.actions{
+display:flex;
+gap:6px;
+flex-wrap:wrap
+}
+
+.lecture{
+display:flex;
+align-items:center;
+gap:12px;
+padding:12px 15px;
+border-top:1px solid #ffffff09
+}
+
+.lectureInfo{
+flex:1
+}
+
+.lectureInfo strong{
+font-size:11px
+}
+
+.lectureInfo small{
+display:block;
+color:#666;
+font-size:8px;
+margin-top:4px;
+overflow:hidden;
+text-overflow:ellipsis;
+white-space:nowrap
+}
+
+#status{
+color:#61dda2;
+font-size:10px;
+margin-top:8px
+}
+
+.modal{
+position:fixed;
+inset:0;
+z-index:100;
+display:none;
+align-items:center;
+justify-content:center;
+padding:20px;
+background:#000c;
+backdrop-filter:blur(15px)
+}
+
+.modal.show{
+display:flex
+}
+
+.form{
+width:min(
+500px,
+100%
+);
+padding:22px;
+border:1px solid #ffffff15;
+border-radius:20px;
+background:#101117
+}
+
+.form h2{
+font-size:18px;
+margin-bottom:18px
+}
+
+.field{
+margin-bottom:13px
+}
+
+label{
+display:block;
+color:#777;
+font-size:9px;
+margin-bottom:6px;
+text-transform:uppercase
+}
+
+input{
+width:100%;
+height:42px;
+border:1px solid #ffffff12;
+border-radius:11px;
+background:#ffffff07;
+color:#fff;
+padding:0 12px;
+outline:0
+}
+
+.formButtons{
+display:flex;
+justify-content:flex-end;
+gap:7px;
+margin-top:15px
+}
+
+@media(max-width:600px){
+
+header{
+top:7px;
+margin-top:7px
+}
+
+.chapterHead{
+align-items:flex-start;
+flex-direction:column
+}
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<div class="logo">
+
+<div class="logoMark">
+A
+</div>
+
+<div class="logoText">
+
+ADMISSION
+
+<small>
+ADMIN PANEL
+</small>
+
+</div>
+
+</div>
+
+
+<div>
+
+<button
+onclick="location.href='index.html'">
+Student Site
+</button>
+
+<button
+class="primary"
+onclick="save()">
+Save
+</button>
+
+</div>
+
+</header>
+
+
+<main class="container">
+
+<h1>
+Course Management
+</h1>
+
+<p class="subtitle">
+Manage PCMB chapters and YouTube lectures
+</p>
+
+<div id="status"></div>
+
+<div id="editor"></div>
+
+</main>
+
+
+<div
+class="modal"
+id="modal">
+
+<div class="form">
+
+<h2 id="formTitle">
+Add
+</h2>
+
+<div id="formBody"></div>
+
+<div class="formButtons">
+
+<button onclick="closeForm()">
+Cancel
+</button>
+
+<button
+class="primary"
+onclick="submitForm()">
+Save
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+
+/* =========================
+   PASSWORD
+========================= */
+
+const ADMIN_PASSWORD="16108";
+
+
+/* =========================
+   AUTH
+========================= */
+
+if(
+sessionStorage.getItem(
+"admin_authenticated"
+)!=="yes"
+){
+
+const password=
+prompt("Admin password");
+
+if(
+password!==ADMIN_PASSWORD
+){
+
+document.body.innerHTML=`
+
+<div style="
+height:100vh;
+display:grid;
+place-items:center;
+font-family:Arial;
+background:#07080d;
+color:#fff">
+
+Access denied.
+
+</div>
+`;
+
+throw new Error(
+"Unauthorized"
+);
+
+}
+
+sessionStorage.setItem(
+"admin_authenticated",
+"yes"
+);
+
+}
+
+
+/* =========================
+   DATA
+========================= */
+
+const defaultData={
+
+Physics:{
+icon:"⚛",
+chapters:[]
+},
+
+Chemistry:{
+icon:"⚗",
+chapters:[]
+},
+
+Math:{
+icon:"∑",
+chapters:[]
+},
+
+Biology:{
+icon:"♧",
+chapters:[]
+}
+
+};
+
+
+let courses=
+JSON.parse(
+localStorage.getItem(
+"admission_courses"
+)
+)||defaultData;
+
+
+/* =========================
+   RENDER
+========================= */
+
+function render(){
+
+const editor=
+document.getElementById(
+"editor"
+);
+
+editor.innerHTML="";
+
+
+Object.keys(courses)
+.forEach(subject=>{
+
+const panel=
+document.createElement(
+"div"
+);
+
+panel.className="panel";
+
+
+panel.innerHTML=`
+
+<div class="subjectHead">
+
+<h2>
+
+${courses[subject].icon}
+
+${subject}
+
+</h2>
+
+<button
+class="primary"
+onclick="addChapter(
+'${subject}'
+)">
+
++ Add Chapter
+
+</button>
+
+</div>
+
+<div class="chapterList"></div>
+
+`;
+
+
+const list=
+panel.querySelector(
+".chapterList"
+);
+
+
+courses[subject]
+.chapters
+.forEach(
+(chapter,ci)=>{
+
+const ch=
+document.createElement(
+"div"
+);
+
+ch.className="chapter";
+
+
+ch.innerHTML=`
+
+<div class="chapterHead">
+
+<strong>
+
+${ci+1}.
+${esc(chapter.title)}
+
+</strong>
+
+<div class="actions">
+
+<button
+onclick="editChapter(
+'${subject}',
+${ci}
+)">
+
+Edit
+
+</button>
+
+<button
+class="danger"
+onclick="deleteChapter(
+'${subject}',
+${ci}
+)">
+
+Delete
+
+</button>
+
+<button
+class="primary"
+onclick="addLecture(
+'${subject}',
+${ci}
+)">
+
++ Lecture
+
+</button>
+
+</div>
+
+</div>
+
+<div class="lectureList"></div>
+
+`;
+
+
+const lectureList=
+ch.querySelector(
+".lectureList"
+);
+
+
+chapter.lectures
+.forEach(
+(lecture,li)=>{
+
+const row=
+document.createElement(
+"div"
+);
+
+row.className="lecture";
+
+
+row.innerHTML=`
+
+<div class="lectureInfo">
+
+<strong>
+
+${esc(
+lecture.title
+)}
+
+</strong>
+
+<small>
+
+${esc(
+lecture.youtube
+)}
+
+</small>
+
+</div>
+
+<button
+onclick="editLecture(
+'${subject}',
+${ci},
+${li}
+)">
+
+Edit
+
+</button>
+
+<button
+class="danger"
+onclick="deleteLecture(
+'${subject}',
+${ci},
+${li}
+)">
+
+Delete
+
+</button>
+
+`;
+
+
+lectureList.appendChild(
+row
+);
+
+});
+
+
+list.appendChild(ch);
+
+});
+
+
+editor.appendChild(panel);
+
+});
+
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+let mode="";
+let target={};
+
+
+function openForm(
+title,
+html
+){
+
+document.getElementById(
+"formTitle"
+).textContent=title;
+
+document.getElementById(
+"formBody"
+).innerHTML=html;
+
+document.getElementById(
+"modal"
+).classList.add(
+"show"
+);
+
+}
+
+
+function closeForm(){
+
+document.getElementById(
+"modal"
+).classList.remove(
+"show"
+);
+
+}
+
+
+/* =========================
+   CHAPTER
+========================= */
+
+function addChapter(
+subject
+){
+
+mode="addChapter";
+
+target={
+subject
+};
+
+openForm(
+"Add Chapter",
+`
+
+<div class="field">
+
+<label>
+Chapter Name
+</label>
+
+<input
+id="title"
+placeholder="e.g. Thermodynamics">
+
+</div>
+
+`);
+
+}
+
+
+function editChapter(
+subject,
+index
+){
+
+mode="editChapter";
+
+target={
+subject,
+index
+};
+
+
+openForm(
+"Edit Chapter",
+`
+
+<div class="field">
+
+<label>
+Chapter Name
+</label>
+
+<input
+id="title"
+value="${attr(
+courses[subject]
+.chapters[index]
+.title
+)}">
+
+</div>
+
+`);
+
+}
+
+
+/* =========================
+   LECTURE
+========================= */
+
+function addLecture(
+subject,
+index
+){
+
+mode="addLecture";
+
+target={
+subject,
+index
+};
+
+
+openForm(
+"Add Lecture",
+`
+
+<div class="field">
+
+<label>
+Lecture Title
+</label>
+
+<input
+id="title"
+placeholder="Lecture name">
+
+</div>
+
+
+<div class="field">
+
+<label>
+Duration
+</label>
+
+<input
+id="duration"
+placeholder="45 min">
+
+</div>
+
+
+<div class="field">
+
+<label>
+YouTube URL
+</label>
+
+<input
+id="youtube"
+placeholder="https://youtube.com/watch?v=...">
+
+</div>
+
+`);
+
+}
+
+
+function editLecture(
+subject,
+chapterIndex,
+lectureIndex
+){
+
+const lecture=
+courses[subject]
+.chapters[chapterIndex]
+.lectures[lectureIndex];
+
+
+mode="editLecture";
+
+
+target={
+subject,
+chapterIndex,
+lectureIndex
+};
+
+
+openForm(
+"Edit Lecture",
+`
+
+<div class="field">
+
+<label>
+Lecture Title
+</label>
+
+<input
+id="title"
+value="${attr(
+lecture.title
+)}">
+
+</div>
+
+
+<div class="field">
+
+<label>
+Duration
+</label>
+
+<input
+id="duration"
+value="${attr(
+lecture.duration||""
+)}">
+
+</div>
+
+
+<div class="field">
+
+<label>
+YouTube URL
+</label>
+
+<input
+id="youtube"
+value="${attr(
+lecture.youtube
+)}">
+
+</div>
+
+`);
+
+}
+
+
+/* =========================
+   SUBMIT
+========================= */
+
+function submitForm(){
+
+const title=
+document.getElementById(
+"title"
+).value.trim();
+
+
+if(!title){
+
+alert(
+"Enter a title."
+);
+
+return;
+
+}
+
+
+if(
+mode==="addChapter"
+){
+
+courses[target.subject]
+.chapters.push({
+
+title:title,
+
+lectures:[]
+
+});
+
+}
+
+
+else if(
+mode==="editChapter"
+){
+
+courses[target.subject]
+.chapters[
+target.index
+]
+.title=title;
+
+}
+
+
+else{
+
+const lecture={
+
+title:title,
+
+duration:
+document.getElementById(
+"duration"
+).value.trim(),
+
+youtube:
+document.getElementById(
+"youtube"
+).value.trim()
+
+};
+
+
+if(!lecture.youtube){
+
+alert(
+"Enter a YouTube URL."
+);
+
+return;
+
+}
+
+
+if(
+mode==="addLecture"
+){
+
+courses[target.subject]
+.chapters[
+target.index
+]
+.lectures.push(
+lecture
+);
+
+}
+
+else{
+
+courses[target.subject]
+.chapters[
+target.chapterIndex
+]
+.lectures[
+target.lectureIndex
+]=lecture;
+
+}
+
+}
+
+
+closeForm();
+
+render();
+
+}
+
+
+/* =========================
+   DELETE
+========================= */
+
+function deleteChapter(
+subject,
+index
+){
+
+if(!confirm(
+"Delete chapter and all lectures?"
+))
+return;
+
+
+courses[subject]
+.chapters
+.splice(
+index,
+1
+);
+
+render();
+
+}
+
+
+function deleteLecture(
+subject,
+chapterIndex,
+lectureIndex
+){
+
+if(!confirm(
+"Delete lecture?"
+))
+return;
+
+
+courses[subject]
+.chapters[
+chapterIndex
+]
+.lectures
+.splice(
+lectureIndex,
+1
+);
+
+render();
+
+}
+
+
+/* =========================
+   SAVE
+========================= */
+
+function save(){
+
+localStorage.setItem(
+"admission_courses",
+JSON.stringify(
+courses
+)
+);
+
+
+document.getElementById(
+"status"
+).textContent=
+"Saved ✓";
+
+
+setTimeout(
+()=>{
+
+document.getElementById(
+"status"
+).textContent="";
+
+},
+2000
+);
+
+}
+
+
+/* =========================
+   ESCAPE
+========================= */
+
+function esc(value){
+
+return String(
+value??""
+).replace(
+/[&<>"']/g,
+c=>({
+
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#039;"
+
+}[c])
+);
+
+}
+
+
+function attr(value){
+
+return esc(value);
+
+}
+
+
+render();
+
+</script>
+
+</body>
+</html>
