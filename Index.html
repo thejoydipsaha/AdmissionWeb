@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ADMISSION — PCMB</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+font-family:Inter,Arial,sans-serif;color:#fff;min-height:100vh;
+background:
+radial-gradient(circle at 10% 0%,#6254ff25,transparent 30%),
+radial-gradient(circle at 90% 20%,#00bfff18,transparent 28%),
+#07080d
+}
+header{
+position:sticky;top:14px;z-index:20;
+width:min(1200px,calc(100% - 28px));margin:14px auto;
+padding:14px 20px;border:1px solid #ffffff18;border-radius:22px;
+background:#1011188c;backdrop-filter:blur(25px);
+display:flex;align-items:center;justify-content:space-between;gap:20px;
+box-shadow:0 20px 60px #0005
+}
+.logo{display:flex;align-items:center;gap:10px;min-width:max-content}
+.logoMark{
+width:40px;height:40px;border-radius:13px;display:grid;place-items:center;
+font-weight:800;background:linear-gradient(135deg,#897bff,#5d91ff)
+}
+.logoText{font-size:14px;font-weight:800}
+.logoText small{
+display:block;color:#888;font-size:8px;letter-spacing:1.5px
+}
+.headerRight{
+display:flex;align-items:center;justify-content:flex-end;
+gap:9px;flex:1
+}
+.search{max-width:380px;flex:1}
+.search input{
+width:100%;height:40px;border:1px solid #ffffff12;border-radius:12px;
+background:#ffffff08;color:#fff;padding:0 14px;outline:0
+}
+.adminBtn{
+height:40px;padding:0 15px;border:1px solid #ffffff12;
+border-radius:12px;background:#ffffff08;color:#aaa1ff;
+font-size:11px;font-weight:600;cursor:pointer;
+backdrop-filter:blur(15px);transition:.25s
+}
+.adminBtn:hover{
+background:#ffffff10;border-color:#aaa1ff35;
+transform:translateY(-1px)
+}
+.hero{
+width:min(1100px,calc(100% - 28px));
+margin:70px auto 50px;text-align:center
+}
+.badge{
+display:inline-block;padding:8px 13px;border:1px solid #ffffff14;
+border-radius:30px;background:#ffffff08;color:#aaa1ff;
+font-size:10px;letter-spacing:1px
+}
+.hero h1{
+font-size:clamp(40px,7vw,75px);
+letter-spacing:-4px;margin-top:20px
+}
+.hero h1 span{
+background:linear-gradient(100deg,#fff,#a99dff,#71c9ff);
+-webkit-background-clip:text;color:transparent
+}
+.hero p{
+max-width:600px;margin:20px auto;color:#8e909c;
+font-size:13px;line-height:1.7
+}
+.container{width:min(1200px,calc(100% - 28px));margin:auto}
+.title{
+display:flex;justify-content:space-between;align-items:end;
+margin-bottom:16px
+}
+.title h2{font-size:19px}
+.title span{color:#777;font-size:10px}
+.subjects{
+display:grid;grid-template-columns:repeat(4,1fr);gap:14px
+}
+.subject{
+min-height:180px;padding:22px;border-radius:22px;
+border:1px solid #ffffff12;background:#ffffff07;
+backdrop-filter:blur(20px);cursor:pointer;transition:.3s
+}
+.subject:hover{
+transform:translateY(-5px);background:#ffffff0d
+}
+.icon{
+width:48px;height:48px;border-radius:15px;
+background:#ffffff0b;display:grid;place-items:center;
+font-size:20px;margin-bottom:22px
+}
+.subject h3{font-size:17px}
+.subject p{
+font-size:10px;color:#777;margin-top:7px
+}
+.course{margin:60px 0 80px}
+.courseHead{
+padding:23px;border:1px solid #ffffff12;border-radius:22px;
+background:#ffffff07;backdrop-filter:blur(20px)
+}
+.courseTop{
+display:flex;justify-content:space-between;
+align-items:center;gap:20px
+}
+.courseName{
+display:flex;align-items:center;gap:14px
+}
+.courseIcon{
+width:50px;height:50px;border-radius:15px;
+display:grid;place-items:center;
+background:linear-gradient(135deg,#7164ff,#8e82ff)
+}
+.courseName h2{font-size:21px}
+.courseName p{
+color:#777;font-size:10px;margin-top:4px
+}
+.progressBox{width:180px}
+.progressLabel{
+display:flex;justify-content:space-between;
+color:#777;font-size:9px;margin-bottom:7px
+}
+.progress{
+height:5px;background:#ffffff0c;
+border-radius:20px;overflow:hidden
+}
+.progress span{
+display:block;height:100%;width:0;
+background:linear-gradient(90deg,#7164ff,#71c9ff);
+transition:.4s
+}
+.chapters{
+margin-top:14px;display:grid;gap:11px
+}
+.chapter{
+border:1px solid #ffffff11;border-radius:19px;
+overflow:hidden;background:#ffffff05
+}
+.chapterHead{
+padding:19px;display:flex;
+justify-content:space-between;align-items:center;
+cursor:pointer
+}
+.chapterInfo{
+display:flex;gap:13px;align-items:center
+}
+.number{
+width:35px;height:35px;border-radius:11px;
+background:#ffffff09;display:grid;
+place-items:center;color:#777;font-size:10px
+}
+.chapterTitle{font-size:13px;font-weight:700}
+.meta{font-size:9px;color:#666;margin-top:4px}
+.chevron{color:#666;transition:.2s}
+.chapter.open .chevron{
+transform:rotate(180deg)
+}
+.lectures{
+display:none;border-top:1px solid #ffffff0c
+}
+.chapter.open .lectures{display:block}
+.lecture{
+display:flex;align-items:center;gap:13px;
+padding:15px 19px;
+border-bottom:1px solid #ffffff08;
+cursor:pointer
+}
+.lecture:last-child{border:0}
+.lecture:hover{background:#ffffff06}
+.play{
+width:34px;height:34px;border-radius:10px;
+background:#ffffff08;display:grid;
+place-items:center;color:#a59aff;font-size:11px
+}
+.lectureInfo{flex:1}
+.lectureTitle{
+font-size:11px;font-weight:600
+}
+.duration{
+font-size:9px;color:#666;margin-top:4px
+}
+.check{
+color:#5de0a7;opacity:0
+}
+.done .check{opacity:1}
+.done .play{color:#5de0a7}
+.modal{
+position:fixed;inset:0;z-index:100;display:none;
+align-items:center;justify-content:center;padding:20px;
+background:#000c;backdrop-filter:blur(15px)
+}
+.modal.show{display:flex}
+.player{
+width:min(950px,100%);
+background:#101117;border:1px solid #ffffff18;
+border-radius:20px;overflow:hidden
+}
+.playerTop{
+padding:14px 17px;display:flex;
+justify-content:space-between;align-items:center
+}
+.playerTitle{font-size:12px;font-weight:700}
+.close{
+width:33px;height:33px;border:0;border-radius:10px;
+background:#ffffff0b;color:#fff;font-size:18px;
+cursor:pointer
+}
+.video{aspect-ratio:16/9;background:#000}
+.video iframe{
+width:100%;height:100%;border:0
+}
+footer{
+width:min(1200px,calc(100% - 28px));
+margin:auto;padding:25px 0;
+border-top:1px solid #ffffff0b;
+color:#555;text-align:center;font-size:9px
+}
+@media(max-width:800px){
+.subjects{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:550px){
+header{
+top:7px;margin-top:7px;padding:11px 13px
+}
+.logoText{font-size:11px}
+.search{max-width:none}
+.adminBtn{
+padding:0 11px;font-size:10px
+}
+.hero{margin-top:45px}
+.hero h1{letter-spacing:-2px}
+.courseTop{
+align-items:flex-start;
+flex-direction:column
+}
+.progressBox{width:100%}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+
+<div class="logoMark">A</div>
+
+<div class="logoText">
+ADMISSION
+<small>VARSITY PREPARATION</small>
+</div>
+
+</div>
+
+<div class="headerRight">
+
+<div class="search">
+<input
+id="search"
+placeholder="Search lectures..."
+>
+</div>
+
+<button
+class="adminBtn"
+onclick="openAdmin()">
+Admin
+</button>
+
+</div>
+
+</header>
+
+
+<section class="hero">
+
+<div class="badge">
+● VARSITY ADMISSION COURSE
+</div>
+
+<h1>
+Prepare smarter.<br>
+<span>Get ahead.</span>
+</h1>
+
+<p>
+Your complete PCMB admission preparation library.
+Watch lectures, follow chapters and track your progress.
+</p>
+
+</section>
+
+
+<main class="container">
+
+<div class="title">
+
+<h2>Choose your subject</h2>
+
+<span>PCMB · ADMISSION</span>
+
+</div>
+
+
+<div class="subjects">
+
+<div class="subject"
+onclick="selectSubject('Physics')">
+
+<div class="icon">⚛</div>
+
+<h3>Physics</h3>
+
+<p>
+Concepts · Problems · Admission
+</p>
+
+</div>
+
+
+<div class="subject"
+onclick="selectSubject('Chemistry')">
+
+<div class="icon">⚗</div>
+
+<h3>Chemistry</h3>
+
+<p>
+Concepts · Reactions · Admission
+</p>
+
+</div>
+
+
+<div class="subject"
+onclick="selectSubject('Math')">
+
+<div class="icon">∑</div>
+
+<h3>Math</h3>
+
+<p>
+Problems · Techniques · Admission
+</p>
+
+</div>
+
+
+<div class="subject"
+onclick="selectSubject('Biology')">
+
+<div class="icon">♧</div>
+
+<h3>Biology</h3>
+
+<p>
+Concepts · MCQ · Admission
+</p>
+
+</div>
+
+</div>
+
+
+<section class="course" id="course">
+
+<div class="courseHead">
+
+<div class="courseTop">
+
+<div class="courseName">
+
+<div class="courseIcon"
+id="courseIcon">
+⚛
+</div>
+
+<div>
+
+<h2 id="courseTitle">
+Physics
+</h2>
+
+<p>
+Admission preparation course
+</p>
+
+</div>
+
+</div>
+
+
+<div class="progressBox">
+
+<div class="progressLabel">
+
+<span>YOUR PROGRESS</span>
+
+<span id="progressText">
+0%
+</span>
+
+</div>
+
+<div class="progress">
+
+<span id="progressBar"></span>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div
+class="chapters"
+id="chapters">
+</div>
+
+</section>
+
+</main>
+
+
+<footer>
+© 2026 Admission Course
+</footer>
+
+
+<div
+class="modal"
+id="modal">
+
+<div class="player">
+
+<div class="playerTop">
+
+<div
+class="playerTitle"
+id="playerTitle">
+Lecture
+</div>
+
+<button
+class="close"
+onclick="closePlayer()">
+×
+</button>
+
+</div>
+
+<div class="video">
+
+<iframe
+id="youtube"
+allow="autoplay; encrypted-media; picture-in-picture"
+allowfullscreen>
+</iframe>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   DEFAULT DATA
+========================= */
+
+const DEFAULT_DATA={
+
+Physics:{
+icon:"⚛",
+chapters:[
+{
+title:"Vectors & Measurement",
+lectures:[
+{
+title:"Introduction to Vectors",
+duration:"42 min",
+youtube:"https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+},
+{
+title:"Vector Addition",
+duration:"38 min",
+youtube:"https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+}
+]
+},
+{
+title:"Newtonian Mechanics",
+lectures:[
+{
+title:"Force & Motion",
+duration:"48 min",
+youtube:"https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+}
+]
+}
+]
+},
+
+Chemistry:{
+icon:"⚗",
+chapters:[]
+},
+
+Math:{
+icon:"∑",
+chapters:[]
+},
+
+Biology:{
+icon:"♧",
+chapters:[]
+}
+
+};
+
+
+/* =========================
+   LOAD
+========================= */
+
+let courses=
+JSON.parse(
+localStorage.getItem(
+"admission_courses"
+)
+)||DEFAULT_DATA;
+
+
+let currentSubject="Physics";
+
+
+let completed=
+JSON.parse(
+localStorage.getItem(
+"admission_progress"
+)||"{}"
+);
+
+
+/* =========================
+   ADMIN
+========================= */
+
+function openAdmin(){
+
+const password=
+prompt("Admin password");
+
+if(password==="16108"){
+
+sessionStorage.setItem(
+"admin_authenticated",
+"yes"
+);
+
+location.href="admin.html";
+
+}
+
+else if(password!==null){
+
+alert("Incorrect password");
+
+}
+
+}
+
+
+/* =========================
+   SUBJECT
+========================= */
+
+function selectSubject(subject){
+
+currentSubject=subject;
+
+document.getElementById(
+"courseTitle"
+).textContent=subject;
+
+document.getElementById(
+"courseIcon"
+).textContent=
+courses[subject].icon;
+
+render();
+
+document.getElementById(
+"course"
+).scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+
+/* =========================
+   RENDER
+========================= */
+
+function render(){
+
+const box=
+document.getElementById(
+"chapters"
+);
+
+box.innerHTML="";
+
+
+const data=
+courses[currentSubject];
+
+
+data.chapters.forEach(
+(chapter,ci)=>{
+
+const ch=
+document.createElement(
+"div"
+);
+
+ch.className="chapter";
+
+
+ch.innerHTML=`
+
+<div class="chapterHead">
+
+<div class="chapterInfo">
+
+<div class="number">
+
+${String(
+ci+1
+).padStart(2,"0")}
+
+</div>
+
+<div>
+
+<div class="chapterTitle">
+
+${esc(
+chapter.title
+)}
+
+</div>
+
+<div class="meta">
+
+${chapter.lectures.length}
+lectures
+
+</div>
+
+</div>
+
+</div>
+
+<div class="chevron">
+⌄
+</div>
+
+</div>
+
+<div class="lectures"></div>
+
+`;
+
+
+const lectureBox=
+ch.querySelector(
+".lectures"
+);
+
+
+chapter.lectures.forEach(
+(lecture,li)=>{
+
+const key=
+currentSubject+
+"-"+
+ci+
+"-"+
+li;
+
+
+const row=
+document.createElement(
+"div"
+);
+
+
+row.className=
+"lecture "+
+(
+completed[key]
+?"done"
+:""
+);
+
+
+row.innerHTML=`
+
+<div class="number">
+
+${String(
+li+1
+).padStart(2,"0")}
+
+</div>
+
+<div class="play">
+▶
+</div>
+
+<div class="lectureInfo">
+
+<div class="lectureTitle">
+
+${esc(
+lecture.title
+)}
+
+</div>
+
+<div class="duration">
+
+${esc(
+lecture.duration||""
+)}
+
+</div>
+
+</div>
+
+<div class="check">
+✓
+</div>
+
+`;
+
+
+row.onclick=()=>{
+
+completed[key]=true;
+
+localStorage.setItem(
+"admission_progress",
+JSON.stringify(completed)
+);
+
+updateProgress();
+
+row.classList.add(
+"done"
+);
+
+openPlayer(
+lecture.title,
+lecture.youtube
+);
+
+};
+
+
+lectureBox.appendChild(
+row
+);
+
+});
+
+
+ch.querySelector(
+".chapterHead"
+).onclick=()=>{
+
+ch.classList.toggle(
+"open"
+);
+
+};
+
+
+box.appendChild(ch);
+
+});
+
+updateProgress();
+
+}
+
+
+/* =========================
+   PROGRESS
+========================= */
+
+function updateProgress(){
+
+let total=0;
+let done=0;
+
+
+courses[currentSubject]
+.chapters.forEach(
+(chapter,ci)=>{
+
+chapter.lectures.forEach(
+(lecture,li)=>{
+
+total++;
+
+const key=
+currentSubject+
+"-"+
+ci+
+"-"+
+li;
+
+if(completed[key])
+done++;
+
+});
+
+});
+
+
+const percentage=
+total
+?Math.round(
+done/total*100
+)
+:0;
+
+
+document.getElementById(
+"progressText"
+).textContent=
+percentage+"%";
+
+
+document.getElementById(
+"progressBar"
+).style.width=
+percentage+"%";
+
+}
+
+
+/* =========================
+   YOUTUBE
+========================= */
+
+function youtubeId(url){
+
+try{
+
+const u=new URL(url);
+
+if(
+u.hostname.includes(
+"youtu.be"
+)
+)
+return u.pathname.slice(1);
+
+
+if(
+u.searchParams.get("v")
+)
+return u.searchParams.get("v");
+
+
+if(
+u.pathname.includes(
+"/embed/"
+)
+)
+return u.pathname
+.split("/embed/")[1];
+
+}catch(e){}
+
+return null;
+
+}
+
+
+function openPlayer(title,url){
+
+const id=
+youtubeId(url);
+
+
+if(!id){
+
+alert(
+"Invalid YouTube URL"
+);
+
+return;
+
+}
+
+
+document.getElementById(
+"playerTitle"
+).textContent=title;
+
+
+document.getElementById(
+"youtube"
+).src=
+"https://www.youtube.com/embed/"+
+id+
+"?autoplay=1&rel=0";
+
+
+document.getElementById(
+"modal"
+).classList.add(
+"show"
+);
+
+
+document.body.style.overflow=
+"hidden";
+
+}
+
+
+function closePlayer(){
+
+document.getElementById(
+"youtube"
+).src="";
+
+
+document.getElementById(
+"modal"
+).classList.remove(
+"show"
+);
+
+
+document.body.style.overflow="";
+
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+document.getElementById(
+"search"
+).oninput=function(){
+
+const q=
+this.value.toLowerCase();
+
+
+document.querySelectorAll(
+".lecture"
+).forEach(row=>{
+
+const title=
+row.querySelector(
+".lectureTitle"
+).textContent
+.toLowerCase();
+
+
+row.style.display=
+!q||
+title.includes(q)
+?"flex"
+:"none";
+
+});
+
+};
+
+
+/* =========================
+   ESCAPE
+========================= */
+
+function esc(value){
+
+return String(
+value??""
+).replace(
+/[&<>"']/g,
+c=>({
+
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#039;"
+
+}[c])
+);
+
+}
+
+
+render();
+
+</script>
+
+</body>
+</html>
